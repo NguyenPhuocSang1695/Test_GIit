@@ -1,0 +1,12 @@
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+form#formDangNhap fieldset#formDangNhap_fielDangNhap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 10px;
+}
