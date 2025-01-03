@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <style>
+    td {
+      border-style: solid;
+    }
+
+    th {
+      color: black;
+      border-style: solid;
+      border-width: 1px;
+    }
+  </style>
+  <table style="border-width: 4px; border-style: solid; width: 100%; " ; <tr>
+    <th style="font-size: 16px; background-color: gray;" colspan="20"> KẾ HOẠCH ĐÀO TẠO</th>
+    </tr>
+
+    <tr>
+      <th style="width:50px;" rowspan="2">STT</th>
+      <th rowspan="2">Ten Mon</th>
+      <th colspan="6">So tiet</th>
+      <th rowspan="2">HK1</th>
+      <th rowspan="2">HK2</th>
+      <th rowspan="2">Ghi chu</th>
+    </tr>
+    <tr>
+      <th style="width: 50px;" colspan="5">LT</th>
+      <th>TH</th>
+
+    </tr>
+    <tr>
+      <th>1</th>
+      <th>Chinh tri</th>
+      <th colspan="5">30</th>
+      <th>30</th>
+      <th>x</th>
+      <th></th>
+      <th rowspan="2">2 tuan dau HK</th>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>Chinh tri</th>
+      <th colspan="5">30</th>
+      <th>30</th>
+      <th></th>
+      <th>x</th>
+
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>Chinh tri</th>
+      <th colspan="5">30</th>
+      <th>30</th>
+      <th>x</th>
+      <th></th>
+      <th rowspan="3">15 tuan</th>
+    </tr>
+    <tr>
+      <th>4</th>
+      <th>Chinh tri</th>
+      <th colspan="5">30</th>
+      <th>30</th>
+      <th>x</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td style="border: solid 1px;">5</td>
+      <th>Chinh tri</th>
+      <th colspan="5">30</th>
+      <th>30</th>
+      <th></th>
+      <th>x</th>
+    </tr>
+  </table> <br> <br>
+  <img src="./image/web.jpg" width="100" height="auto">
+  <style>
+    .in1 {
+      width: 30em;
+    }
+
+    .required {
+      color: red;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+      display: none;
+        }
+  </style>
+
+  <form action="">
+    <fieldset>
+      <h3 style="text-align: center;">Phieu dat phong</h3>
+      <p style="border-bottom: solid 1px;"></p>
+      <label for="name">Ho ten <span class="required">*</span></label> <br>
+      <input class="in1" type="text" id="name"> <br>
+      <p class="error" id="errorName">Vui long nhap ho ten</p> <br>
+      <label for="">Dia chi</label><br>
+      <input class="in1" type="text" id=""> <br> <br>
+      <label for="idnummb">So chung minh nhan dan<span class="required">*</span></label> <br>
+      <input class="in1" type="text" id="idnumb"> <br>
+      <p class="error" id="errorId">Vui long Soccd</p> <br>
+
+      <label for="">Muc gia</label> <br>
+      <select name="" id="" style="width:20em">
+        <option value="1">Loai thuong</option>
+      </select> <br> <br>
+      <div style="display:flex; ">
+        <div>
+          <label for="">Ngay thue</label> <br>
+          <input type="date" id="">
+        </div>
+
+        <div style="margin-left: 15em;">
+          <label for="">Ngay thue</label> <br>
+          <input type="date" id="">
+        </div>
+      </div> <br> <br>
+      <label for="">
+        Dich vu di kem
+      </label> <br>
+      <input type="checkbox"> An sang <br>
+      <input type="checkbox"> Giat ui <br>
+      <input type="checkbox"> Bao buoi sang <br>
+      <label for=""> <br>
+        Tien thue phong
+      </label><br>
+      <input type="text" id="" style="width:15em"> VND <br>
+      <button style="margin-top:5px" type="button" onclick="Price()">Tinh don gia</button>
+      <button style="margin-top:5px" type="button" onclick="Register()">Dang ky</button>
+
+
+    </fieldset>
+  </form>
+
+<script>
+  function Price() {
+    alert("Tinh nang nay dang phat trien");
+  }
+  function Register() {
+    const name = document.getElementById("name").value.trim();
+    const idnumb= document.getElementById("idnumb").value.trim();
+    const errorName= document.getElementById("errorName");
+    const errorId= document.getElementById("errorId");
+    if(!name){
+      errorName.style.display= "block";
+    }
+    else {
+      errorName.style.display= "none";
+      }
+      if(!idnumb) {
+      errorId.style.display= "block";  
+      }
+      else {
+        errorId.style.display= "none";
+      }
+    }
+</script>
+</body>
+
+</html>

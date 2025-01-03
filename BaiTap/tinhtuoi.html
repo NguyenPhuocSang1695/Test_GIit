@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<script>
+  function TinhTuoi(){
+    var d= new Date();
+    let namsinh= document.getElementById("namsinh").value;
+    let ketqua= d.getFullYear() -namsinh;
+    document.getElementById("ketqua").innerHTML=ketqua;
+  }
+</script>
+</head>
+<body>
+<form action="">
+  <fieldset>
+    <label for="namsinh">Nam sinh: </label>
+    <input type="text" id="namsinh">
+    <button type="button" onclick="TinhTuoi()">Tinh tuoi</button>
+    <p id="ketqua">Tuoi</p>
+  </fieldset>
+</form>
+</body>
+</html>

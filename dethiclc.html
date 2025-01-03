@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function tinhtuoi() {
+            var d = new Date();
+            let namsinh = document.getElementById ("namsinh").value;
+            let Tuoi = d.getFullYear() - namsinh;
+            document.getElementById ("Tuoi").innerText = Tuoi;
+        }
+    </script>
+</head>
+<body>
+    <form action="">
+        <label for="">Năm sinh: </label>
+        <input type="text" name="" id="namsinh">
+        <button type="button" onclick="tinhtuoi()">Tuổi</button>
+        <br>
+        <p id="Tuoi">Tuoi</p>
+    </form>
+</body>
+</html>

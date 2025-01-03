@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nhập mảng chuỗi</title>
+  </head>
+  <body>
+    <h1>Nhập mảng chuỗi và thực hiện các thao tác</h1>
+
+    <!-- Nhập số lượng chuỗi -->
+    <label for="n">Nhập số lượng chuỗi:</label>
+    <input type="number" id="n" min="1" />
+    <button onclick="nhapMang()">Nhập mảng chuỗi</button>
+
+    <div id="mangInput"></div>
+
+    <!-- Kết quả -->
+    <div id="ketQua"></div>
+
+    <script>
+   
+      function nhapMang() {
+        const n = parseInt(document.getElementById("n").value);
+
+        if (isNaN(n) || n <= 0) {
+          alert("Vui lòng nhập số lượng chuỗi hợp lệ.");
+          return;
+        }
+
+        let htmlInput = "";
+        for (let i = 0; i < n; i++) {
+          htmlInput += `<label for="chuoi${i}">Chuỗi ${i + 1}:</label>
+                        <input type="text" id="chuoi${i}" /><br>`;
+        }
+
+        htmlInput += `<button onclick="xuLyMang(${n})">Xử lý mảng chuỗi</button>`;
+        document.getElementById("mangInput").innerHTML = htmlInput;
+      }
+ 
+      function xuLyMang(n) {
+        let mangChuoi = [];
+        for (let i = 0; i < n; i++) {
+          const chuoi = document.getElementById(`chuoi${i}`).value;
+          mangChuoi.push(chuoi);
+        }
+
+        let mangChuoiSorted = [...mangChuoi].sort();
+        let viTriChuoiDaiNhat = 0;
+        let maxLength = mangChuoi[0].length;
+
+        for (let i = 1; i < mangChuoi.length; i++) {
+          if (mangChuoi[i].length > maxLength) {
+            maxLength = mangChuoi[i].length;
+            viTriChuoiDaiNhat = i;
+          }
+        }
+        let ketQuaHtml = `
+          <b>Mảng chuỗi sau khi sắp xếp theo thứ tự a, b, c:</b> <br>
+          ${mangChuoiSorted.join(", ")} <br><br>
+          
+          <b>Chuỗi dài nhất:</b> ${mangChuoi[viTriChuoiDaiNhat]} <br>
+          <b>Vị trí của chuỗi dài nhất trong mảng ban đầu:</b> ${
+            viTriChuoiDaiNhat + 1
+          }
+        `;
+        document.getElementById("ketQua").innerHTML = ketQuaHtml;
+      }
+    </script>
+  </body>
+</html>

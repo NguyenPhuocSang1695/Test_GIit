@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chuỗi đảo ngược và in hoa</title>
+  </head>
+  <body>
+    <h1>Nhập chuỗi và thao tác với chuỗi</h1>
+
+    <!-- Nhập chuỗi -->
+    <label for="chuoi">Nhập chuỗi:</label>
+    <input type="text" id="chuoi" />
+    <button onclick="xulyChuoi()">Thực hiện</button>
+
+    <!-- Kết quả -->
+    <div id="ketQua"></div>
+
+    <script>
+      // Hàm đảo ngược chuỗi
+      function daoNguocChuoi(str) {
+        return str.split("").reverse().join("");
+      }
+
+      // Hàm chuyển chuỗi thành chữ in hoa
+      function inHoaChuoi(str) {
+        return str.toUpperCase();
+      }
+
+      // Hàm xử lý chuỗi
+      function xulyChuoi() {
+        // Lấy giá trị chuỗi từ input
+        const chuoi = document.getElementById("chuoi").value;
+
+        // Kiểm tra nếu chuỗi không rỗng
+        if (!chuoi) {
+          alert("Vui lòng nhập chuỗi!");
+          return;
+        }
+
+        // Gọi các hàm và hiển thị kết quả
+        const chuoiDaoNguoc = daoNguocChuoi(chuoi);
+        const chuoiInHoa = inHoaChuoi(chuoi);
+
+        const ketQuaHtml = `
+          <b>Chuỗi đảo ngược:</b> ${chuoiDaoNguoc} <br>
+          <b>Chuỗi in hoa:</b> ${chuoiInHoa}
+        `;
+
+        // Hiển thị kết quả lên màn hình
+        document.getElementById("ketQua").innerHTML = ketQuaHtml;
+      }
+    </script>
+  </body>
+</html>

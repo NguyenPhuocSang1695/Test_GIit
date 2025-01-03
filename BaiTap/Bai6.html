@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giải phương trình bậc 1 và bậc 2</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      label {
+        display: inline-block;
+        width: 150px;
+        font-weight: bold;
+      }
+      input {
+        margin-bottom: 10px;
+      }
+      button {
+        margin-left: 155px;
+      }
+      p {
+        font-style: italic;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Giải phương trình bậc 1 và bậc 2</h1>
+
+    <h2>Giải phương trình bậc 1: ax + b = 0</h2>
+    <label for="a1">Nhập a:</label>
+    <input type="number" id="a1" step="any" placeholder="Nhập a" />
+    <label for="b1">Nhập b:</label>
+    <input type="number" id="b1" step="any" placeholder="Nhập b" />
+    <button onclick="giaiPhuongTrinhBac1()">Giải phương trình</button>
+
+    <h2>Giải phương trình bậc 2: ax² + bx + c = 0</h2>
+    <label for="a2">Nhập a:</label>
+    <input type="number" id="a2" step="any" placeholder="Nhập a" />
+    <label for="b2">Nhập b:</label>
+    <input type="number" id="b2" step="any" placeholder="Nhập b" />
+    <label for="c2">Nhập c:</label>
+    <input type="number" id="c2" step="any" placeholder="Nhập c" />
+    <button onclick="giaiPhuongTrinhBac2()">Giải phương trình</button>
+
+    <p id="ketQua1"></p>
+    <p id="ketQua2"></p>
+
+    <script>
+      // Giải phương trình bậc 1
+      function giaiPhuongTrinhBac1() {
+        const a = parseFloat(document.getElementById("a1").value);
+        const b = parseFloat(document.getElementById("b1").value);
+
+        // Kiểm tra a và b
+        if (a === 0) {
+          if (b === 0) {
+            document.getElementById("ketQua1").innerText =
+              "Phương trình vô số nghiệm.";
+          } else {
+            document.getElementById("ketQua1").innerText =
+              "Phương trình vô nghiệm.";
+          }
+        } else {
+          const x = -b / a;
+          document.getElementById(
+            "ketQua1"
+          ).innerText = `Nghiệm của phương trình: x = ${x}`;
+        }
+      }
+
+      // Giải phương trình bậc 2
+      function giaiPhuongTrinhBac2() {
+        const a = parseFloat(document.getElementById("a2").value);
+        const b = parseFloat(document.getElementById("b2").value);
+        const c = parseFloat(document.getElementById("c2").value);
+
+        // Kiểm tra a
+        if (a === 0) {
+          if (b === 0) {
+            if (c === 0) {
+              document.getElementById("ketQua2").innerText =
+                "Phương trình vô số nghiệm.";
+            } else {
+              document.getElementById("ketQua2").innerText =
+                "Phương trình vô nghiệm.";
+            }
+          } else {
+            const x = -c / b;
+            document.getElementById(
+              "ketQua2"
+            ).innerText = `Phương trình bậc 1: Nghiệm x = ${x}`;
+          }
+        } else {
+          const delta = b * b - 4 * a * c; // Tính biệt thức delta
+
+          if (delta > 0) {
+            const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+            const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+            document.getElementById(
+              "ketQua2"
+            ).innerText = `Phương trình có hai nghiệm phân biệt: x1 = ${x1}, x2 = ${x2}`;
+          } else if (delta === 0) {
+            const x = -b / (2 * a);
+            document.getElementById(
+              "ketQua2"
+            ).innerText = `Phương trình có nghiệm kép: x = ${x}`;
+          } else {
+            document.getElementById("ketQua2").innerText =
+              "Phương trình vô nghiệm.";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

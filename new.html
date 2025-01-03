@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="index.html"></form>
+    <p id="sang">sang</p>
+    <a href="./img/hinh01.jpg"></a>
+    <button type="button" onclick="aa()">sang</button>
+    <table border="4 solid black">
+      <th colspan="2">sang is me</th>
+      <tr>
+        <td>sang sang sang</td>
+        <td>sang 02</td>
+      </tr>
+    </table>
+
+    <select name="sang" id="sang" click>
+      <optgroup label="thanh phan ten">
+        <option value="1">nguyen</option>
+        <option value="2">phuoc</option>
+        <option value="3">sang</option>
+      </optgroup>
+
+      <option value="4" selected>nguyen phuoc sang</option>
+    </select>
+
+    <style>
+      table {
+        text-transform: lowercase;
+      }
+    </style>
+    <script>
+      function aa() {
+        let a = "42";
+        let b = Number(a) + 10;
+        document.getElementById("sang").innerHTML = b;
+        window.prompt("sang");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tính Diện Tích và Chu Vi</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        margin-bottom: 20px;
+      }
+      label {
+        display: inline-block;
+        width: 150px;
+        font-weight: bold;
+      }
+      input {
+        margin-bottom: 10px;
+      }
+      button {
+        margin-left: 155px;
+      }
+      p {
+        font-style: italic;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tính Diện Tích và Chu Vi</h1>
+
+    <!-- Hình vuông -->
+    <div class="container">
+      <h2>Hình Vuông</h2>
+      <label for="canhVuong">Nhập cạnh:</label>
+      <input type="number" id="canhVuong" placeholder="Chiều dài cạnh" />
+      <button onclick="tinhHinhVuong()">Tính</button>
+      <p id="resultVuong"></p>
+    </div>
+    <div class="container">
+      <h2>Hình chữ nhật</h2>
+      <label for="chieuDai">Nhập chiều dài: </label>
+      <input type="number" id="chieuDai" placeHolder="Chiều dài">
+      <label for="chieuRong">Nhập chiều rộng: </label>
+      <input type="number" id="chieuRong" placeHolder="Chiều rộng">
+      <button onclick="tinhHinhChuNhat()">Tính</button>
+      <p id="resultHCN" ></p> 
+    </div>
+    <!-- Hình tròn -->
+    <div class="container">
+      <h2>Hình Tròn</h2>
+      <label for="banKinhTron">Nhập bán kính:</label>
+      <input type="number" id="banKinhTron" placeholder="Bán kính" />
+      <button onclick="tinhHinhTron()">Tính</button>
+      <p id="resultTron"></p>
+    </div>
+
+    <!-- Tam giác -->
+    <div class="container">
+      <h2>Tam Giác</h2>
+      <label for="canhA">Nhập cạnh a:</label>
+      <input type="number" id="canhA" placeholder="Cạnh a" />
+      <br />
+      <label for="canhB">Nhập cạnh b:</label>
+      <input type="number" id="canhB" placeholder="Cạnh b" />
+      <br />
+      <label for="canhC">Nhập cạnh c:</label>
+      <input type="number" id="canhC" placeholder="Cạnh c" />
+      <button onclick="tinhTamGiac()">Tính</button>
+      <p id="resultTamGiac"></p>
+    </div>
+
+    <script>
+      // Tính hình vuông
+      function tinhHinhVuong() {
+        const canh = parseFloat(document.getElementById("canhVuong").value);
+        if (canh > 0) {
+          const dienTich = canh * canh;
+          const chuVi = 4 * canh;
+          document.getElementById(
+            "resultVuong"
+          ).innerText = `Diện tích: ${dienTich}, Chu vi: ${chuVi}`;
+        } else {
+          document.getElementById("resultVuong").innerText =
+            "Vui lòng nhập chiều dài cạnh hợp lệ!";
+        }
+      }
+
+      // Tính hình tròn
+      function tinhHinhTron() {
+        const banKinh = parseFloat(
+          document.getElementById("banKinhTron").value
+        );
+        if (banKinh > 0) {
+          const PI = Math.PI;
+          const dienTich = PI * banKinh * banKinh;
+          const chuVi = 2 * PI * banKinh;
+          document.getElementById(
+            "resultTron"
+          ).innerText = `Diện tích: ${dienTich.toFixed(
+            2
+          )}, Chu vi: ${chuVi.toFixed(2)}`;
+        } else {
+          document.getElementById("resultTron").innerText =
+            "Vui lòng nhập bán kính hợp lệ!";
+        }
+      }
+
+      // Tính tam giác
+      function tinhTamGiac() {
+        const a = parseFloat(document.getElementById("canhA").value);
+        const b = parseFloat(document.getElementById("canhB").value);
+        const c = parseFloat(document.getElementById("canhC").value);
+
+        // Kiểm tra tam giác hợp lệ
+        if (a > 0 && b > 0 && c > 0 && a + b > c && a + c > b && b + c > a) {
+          const chuVi = a + b + c;
+          const p = chuVi / 2; // Nửa chu vi
+          const dienTich = Math.sqrt(p * (p - a) * (p - b) * (p - c)); // Công thức Heron
+          document.getElementById(
+            "resultTamGiac"
+          ).innerText = `Diện tích: ${dienTich.toFixed(2)}, Chu vi: ${chuVi}`;
+        } else {
+          document.getElementById("resultTamGiac").innerText =
+            "Ba cạnh không tạo thành một tam giác hợp lệ!";
+        }
+      }
+    </script>
+  </body>
+</html>

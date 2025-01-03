@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kiểm tra số nguyên</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      label {
+        display: inline-block;
+        width: 150px;
+        font-weight: bold;
+      }
+      input {
+        margin-bottom: 10px;
+      }
+      button {
+        margin-left: 155px;
+      }
+      p {
+        font-style: italic;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Kiểm tra số nguyên</h1>
+
+    <label for="soNguyen">Nhập số nguyên:</label>
+    <input type="number" id="soNguyen" placeholder="Nhập số nguyên" />
+    <button onclick="kiemTraSo()">Kiểm tra</button>
+    <p id="ketQua"></p>
+
+    <script>
+      // Hàm kiểm tra số nguyên tố
+      function laSoNguyenTo(n) {
+        if (n <= 1) return false; // Số nguyên tố phải lớn hơn 1
+        for (let i = 2; i <= Math.sqrt(n); i++) {
+          if (n % i === 0) return false; // Nếu có ước số khác ngoài 1 và chính nó
+        }
+        return true;
+      }
+
+      // Hàm kiểm tra số chính phương
+      function laSoChinhPhuong(n) {
+        const canBacHai = Math.sqrt(n); // Tính căn bậc 2 của n
+        return canBacHai === Math.floor(canBacHai); // Kiểm tra xem căn bậc hai có phải là số nguyên không
+      }
+
+      // Hàm kiểm tra số hoàn hảo
+      function laSoHoanHao(n) {
+        if (n <= 0) return false; // Số hoàn hảo phải là số dương
+        let tongUoc = 0;
+        for (let i = 1; i <= n / 2; i++) {
+          if (n % i === 0) tongUoc += i; // Tính tổng các ước số nhỏ hơn n
+        }
+        return tongUoc === n; // Kiểm tra tổng ước số có bằng n không
+      }
+
+      // Hàm chính để xử lý và hiển thị kết quả
+      function kiemTraSo() {
+        const n = parseInt(document.getElementById("soNguyen").value);
+
+        // Kiểm tra nếu giá trị nhập vào không hợp lệ
+        if (isNaN(n)) {
+          document.getElementById("ketQua").innerText =
+            "Vui lòng nhập một số nguyên!";
+          return;
+        }
+
+        const nguyenTo = laSoNguyenTo(n)
+          ? "là số nguyên tố"
+          : "không là số nguyên tố";
+        const chinhPhuong = laSoChinhPhuong(n)
+          ? "là số chính phương"
+          : "không là số chính phương";
+        const hoanHao = laSoHoanHao(n)
+          ? "là số hoàn hảo"
+          : "không là số hoàn hảo";
+
+        // Hiển thị kết quả
+        document.getElementById(
+          "ketQua"
+        ).innerText = `Số ${n}: ${nguyenTo}, ${chinhPhuong}, ${hoanHao}.`;
+      }
+    </script>
+  </body>
+</html>

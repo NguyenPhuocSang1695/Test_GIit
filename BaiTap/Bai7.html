@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xử lý mảng số nguyên</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      label {
+        display: inline-block;
+        width: 150px;
+        font-weight: bold;
+      }
+      input {
+        margin-bottom: 10px;
+      }
+      button {
+        margin-left: 155px;
+      }
+      p {
+        font-style: italic;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Xử lý mảng số nguyên</h1>
+
+    <label for="n">Nhập số phần tử n:</label>
+    <input type="number" id="n" placeholder="Nhập n" />
+    <button onclick="nhapMang()">Nhập mảng</button>
+
+    <div id="mangInput" style="display: none">
+      <h2>Nhập các phần tử mảng:</h2>
+      <div id="inputPhanTu"></div>
+      <button onclick="xuLyMang()">Xử lý mảng</button>
+    </div>
+
+    <h2>Kết quả:</h2>
+    <p id="ketQua"></p>
+
+    <script>
+      let n;
+      let mang;
+
+      // Hàm nhập mảng
+      function nhapMang() {
+        n = parseInt(document.getElementById("n").value);
+        if (isNaN(n) || n <= 0) {
+          alert("Vui lòng nhập số nguyên dương n!");
+          return;
+        }
+
+        // Tạo các input để nhập các phần tử mảng
+        let inputHtml = "";
+        for (let i = 0; i < n; i++) {
+          inputHtml += `<label for="pt${i}">Nhập phần tử ${
+            i + 1
+          }:</label><input type="number" id="pt${i}" placeholder="Nhập phần tử ${
+            i + 1
+          }" /><br>`;
+        }
+        document.getElementById("inputPhanTu").innerHTML = inputHtml;
+        document.getElementById("mangInput").style.display = "block";
+      }
+
+      // Hàm xử lý mảng
+      function xuLyMang() {
+        mang = [];
+        // Lấy giá trị các phần tử mảng từ input
+        for (let i = 0; i < n; i++) {
+          let giaTri = parseInt(document.getElementById(`pt${i}`).value);
+          mang.push(giaTri);
+        }
+
+        // Tìm số dương nhỏ nhất trong mảng
+        let soDuongMin = Number.POSITIVE_INFINITY;
+        for (let i = 0; i < mang.length; i++) {
+          if (mang[i] > 0 && mang[i] < soDuongMin) {
+            soDuongMin = mang[i];
+          }
+        }
+        // Nếu không có số dương trong mảng
+        if (soDuongMin === Number.POSITIVE_INFINITY) {
+          soDuongMin = "Không có số dương trong mảng.";
+        }
+
+        // Sắp xếp mảng giảm dần
+        mang.sort((a, b) => b - a);
+
+        // Đảo mảng
+        let mangDao = [...mang].reverse();
+
+        // Hiển thị kết quả
+        let ketQua = `<b>Số dương nhỏ nhất:</b> ${soDuongMin}<br>`;
+        ketQua += `<b>Mảng sau khi sắp xếp giảm dần:</b> ${mang.join(
+          ", "
+        )}<br>`;
+        ketQua += `<b>Mảng sau khi đảo thứ tự:</b> ${mangDao.join(", ")}`;
+
+        document.getElementById("ketQua").innerHTML = ketQua;
+      }
+    </script>
+  </body>
+</html>

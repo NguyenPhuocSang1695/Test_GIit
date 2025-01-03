@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tam giác số tăng dần</title>
+  </head>
+  <body>
+    <h1>In tam giác số tăng dần</h1>
+
+    <label for="n">Nhập n (0 < n < 10):</label>
+    <input type="number" id="n" min="1" max="9" />
+    <button onclick="inTamGiac()">Tạo Tam Giác</button>
+
+    <div id="tamGiac"></div>
+
+    <h2>Kết quả tính toán:</h2>
+    <p id="ketQua"></p>
+
+    <script>
+      function inTamGiac() {
+        const n = parseInt(document.getElementById("n").value);
+
+        // Kiểm tra giá trị n hợp lệ
+        if (isNaN(n) || n <= 0 || n >= 10) {
+          alert("Vui lòng nhập n trong khoảng từ 1 đến 9.");
+          return;
+        }
+
+        let tamGiac = [];
+        let currentNumber = 1;
+
+        // Tạo tam giác số tăng dần
+        for (let i = 1; i <= n; i++) {
+          let row = [];
+          for (let j = 0; j < i; j++) {
+            row.push(currentNumber++);
+          }
+          tamGiac.push(row);
+        }
+
+        // In tam giác số lên màn hình
+        let tamGiacHtml = "";
+        tamGiac.forEach((row) => {
+          tamGiacHtml += row.join(" ") + "<br>";
+        });
+        document.getElementById("tamGiac").innerHTML = tamGiacHtml;
+
+        // Tính tổng các số chẵn trong tam giác số
+        let tongSoChan = 0;
+        let tongCotDau = 0;
+        let tongDongCuoi = tamGiac[n - 1].reduce((a, b) => a + b, 0);
+
+        for (let i = 0; i < tamGiac.length; i++) {
+          for (let j = 0; j < tamGiac[i].length; j++) {
+            let number = tamGiac[i][j];
+
+            // Tính tổng số chẵn
+            if (number % 2 === 0) {
+              tongSoChan += number;
+            }
+
+            // Tính tổng cột đầu tiên
+            if (j === 0) {
+              tongCotDau += number;
+            }
+          }
+        }
+
+        // Hiển thị kết quả
+        let ketQua = `
+          <b>Tổng các số chẵn trong tam giác số:</b> ${tongSoChan} <br>
+          <b>Tổng cột đầu tiên:</b> ${tongCotDau} <br>
+          <b>Tổng dòng cuối cùng:</b> ${tongDongCuoi}
+        `;
+        document.getElementById("ketQua").innerHTML = ketQua;
+      }
+    </script>
+  </body>
+</html>

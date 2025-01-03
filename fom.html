@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      name="frmPhieudatphong"
+      style="border: 1px solid black"
+      action=""
+      onsubmit="return validateForm()"
+    >
+      <h2>Phiếu đặt phòng</h2>
+      <hr />
+      <label for="txtHoten">Họ tên *</label><br />
+      <input type="text" id="txtHoten" required />
+      <br />
+
+      <label for="txtDiachi">Địa chỉ</label><br />
+      <input type="text" id="txtDiachi" />
+      <br />
+
+      <label for="txtcmnd">Số căn cước công dân *</label><br />
+      <input type="text" id="txtcmnd" required />
+      <br />
+
+      <label for="txtMucgia">Mức giá</label>
+      <br />
+      <select name="choMucgia" id="choMucgia" onchange="ssdb()">
+        <option value="a">Loại thường</option>
+        <option value="b">Loại sang trọng</option>
+        <option value="c">Loại đặt đặc biệt</option>
+      </select>
+      <br />
+
+      <label for="dateNgaythue">Ngày thuê</label>
+      <label for="dateNgaytra" style="margin-left: 60px">Ngày trả</label><br />
+      <input type="date" id="dateNgaythue" />
+      <input type="date" id="dateNgaytra" />
+      <br />
+
+      <label>Dịch vụ đi kèm</label><br />
+      <input type="checkbox" id="as" name="chkAnsang" />Ăn sáng <br />
+      <input type="checkbox" id="gu" name="chkGiatui" />Giặt ủi <br />
+      <input type="checkbox" id="bbs" name="chkChaobuoisang" />Báo buổi sáng
+      <br />
+
+      <label for="txtTienthuephong">Tiền thuê phòng</label><br />
+      <input type="text" id="txtTienthuephong" /> VNĐ<br />
+      <button type="button" name="btnTinhdongia" onclick="tdg()">
+        Tính đơn giá
+      </button>
+      <input
+        type="submit"
+        name="subDangky"
+        value="Đăng ký"
+        onclick="validateForm()"
+      />
+    </form>
+    <style>
+      label,
+      input,
+      select,
+      button,
+      h2,
+      hr {
+        margin: 10px 10px;
+      }
+    </style>
+    <script>
+      function ssdb() {
+        let selectMucgia = document.getElementById("choMucgia");
+        let checkboxAnsang = document.getElementById("as");
+        let selectedValue = selectMucgia.value;
+
+        // Lắng nghe sự kiện thay đổi giá trị trong <select>
+
+        // Lấy giá trị được chọn
+        if (selectedValue === "c" || selectedValue === "b") {
+          // Nếu chọn "Loại đặt đặc biệt", đánh dấu checkbox "Ăn sáng"
+          checkboxAnsang.checked = true;
+          checkboxAnsang.disabled = true;
+        } else {
+          // Nếu chọn các giá trị khác, bỏ đánh dấu checkbox "Ăn sáng"
+          checkboxAnsang.checked = false;
+        }
+      }
+
+      function tdg() {
+        const nt = document.getElementById("dateNgaythue").value; // Ngày thuê
+        const ntr = document.getElementById("dateNgaytra").value; // Ngày trả
+        let dongia = 0;
+        let loaingay = document.getElementById("choMucgia").value; // Lấy giá trị đã chọn trong dropdown
+        let snt = 1; // Mặc định là 1 ngày nếu chưa chọn ngày
+
+        // Kiểm tra nếu cả 2 ngày đều được chọn
+        if (nt && ntr) {
+          const ngayThue = new Date(nt);
+          const ngayTra = new Date(ntr);
+
+          // Tính số ngày thuê
+          snt = (ngayTra - ngayThue) / (1000 * 3600 * 24); // Số ngày = (Ngày trả - Ngày thuê) / (số mili giây trong một ngày)
+
+          if (snt < 1) {
+            window.alert("Ngày trả phải sau ngày thuê");
+            return;
+          }
+        }
+
+        let as = document.getElementById("as");
+        let gu = document.getElementById("gu");
+        let bbs = document.getElementById("bbs");
+
+        // Kiểm tra loại phòng và tính đơn giá
+        if (loaingay === "a") {
+          dongia = 150000 * snt;
+        } else if (loaingay === "b") {
+          dongia = 300000 * snt;
+        } else if (loaingay === "c") {
+          dongia = 500000 * snt;
+        }
+
+        if (as.checked && (loaingay != "b" || loaingay != "c")) {
+          dongia = dongia + dongia * 0.05;
+          if (gu.checked || bbs.checked) {
+            dongia = dongia + dongia * 0.05 * 2;
+          } else if (gu.checked && bbs.checked) {
+            dongia = dongia + dongia * 0.05 * 3;
+          }
+        }
+
+        // Cập nhật giá tiền thuê phòng
+        document.getElementById("txtTienthuephong").value = dongia + " VNĐ";
+      }
+
+      function validateForm() {
+        const cmnd = document.getElementById("txtcmnd");
+        const name = document.getElementById("txtHoten").value;
+        if (name === "") {
+          window.alert("Vui lòng nhập tên");
+          document.getElementById("txtHoten").focus();
+          return false; // Ngừng việc gửi form
+        }
+
+        if (isNaN(cmnd) || cmnd === "") {
+          alert("CMND phải là số");
+          document.getElementById("txtcmnd").focus();
+          return false; // Ngừng việc gửi form
+        }
+        return true; // Chấp nhận form nếu tên hợp lệ
+      }
+    </script>
+  </body>
+</html>
